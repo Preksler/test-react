@@ -1,16 +1,23 @@
-export const App = () => {
+import { useRef } from "react";
+
+const Player = ({ source }) => {
+  const playerRef = useRef();
+  const play = () => playerRef.current.play();
+  const pause = () => playerRef.current.pause();
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <video ref={playerRef} src={source}>
+        Sorry, your browser does not support embedded videos.
+      </video>
+      <div>
+        <button onClick={play}>Play</button>
+        <button onClick={pause}>Pause</button>
+      </div>
     </div>
   );
+};
+
+export const App = () => {
+  return <Player source="http://media.w3.org/2010/05/sintel/trailer.mp4" />;
 };
